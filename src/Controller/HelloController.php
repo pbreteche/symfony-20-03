@@ -21,7 +21,6 @@ class HelloController extends AbstractController
 
     public function hello2()
     {
-        dump('test');
         return new Response('<body>
 <h1>Bonjour tout le monde!</h1>
 </body>');
