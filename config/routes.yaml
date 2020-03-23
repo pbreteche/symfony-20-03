@@ -5,3 +5,5 @@ hello_first:
 hello_convert:
     path: /convert/{kilometers}
     controller: App\Controller\HelloController::convert
+    requirements:
+        kilometers: \d+
