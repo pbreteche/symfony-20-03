@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\BoardGame;
 use App\Repository\BoardGameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,15 +28,13 @@ class BoardGameController extends AbstractController
 
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
+     *
+     * Composant ParamConverter est capable de traduire un paramètre de route en:
+     * - Entité
+     * - \DateTime
      */
-    public function show(int $id, BoardGameRepository $repository)
+    public function show(BoardGame $boardGame)
     {
-        $boardGame = $repository->find($id);
-
-        if (!$boardGame) {
-            throw $this->createNotFoundException('Ce jeu n\'existe pas');
-        }
-
         return $this->render('board_game/show.html.twig', [
             'board_game' => $boardGame,
         ]);
