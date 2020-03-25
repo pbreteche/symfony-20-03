@@ -85,14 +85,16 @@ class BoardGameController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", methods={"GET", "PUT"})
      */
     public function edit(
         BoardGame $game,
         Request $request,
         EntityManagerInterface $manager
     ) {
-        $form = $this->createFormBuilder($game)
+        $form = $this->createFormBuilder($game, [
+            'method' => 'PUT',
+        ])
             ->add('name', null, [
                 'label' => 'Nom',
             ])
