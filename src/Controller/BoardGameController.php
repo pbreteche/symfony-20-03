@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @Route("/board-game")
@@ -36,8 +37,10 @@ class BoardGameController extends AbstractController
      * - Entité
      * - \DateTime
      */
-    public function show(BoardGame $boardGame)
+    public function show(BoardGame $boardGame, ValidatorInterface $validator)
     {
+        // pas utile ici, juste pour un exemple de validation hors formulaire
+        $errors = $validator->validate($boardGame);
         return $this->render('board_game/show.html.twig', [
             'board_game' => $boardGame,
         ]);

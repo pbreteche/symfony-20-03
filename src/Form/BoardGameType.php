@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\BoardGame;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,10 +23,16 @@ class BoardGameType extends AbstractType
             ->add('releasedAt', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
-                'label' => 'Date de sortie'
+                'label' => 'Date de sortie',
+                'attr' => [
+                    'max' => date('Y-m-d'),
+                ]
             ])
-            ->add('ageGroup', null, [
+            ->add('ageGroup', IntegerType::class, [
                 'label' => 'À partir de',
+                'attr' => [
+                    'min' => 0,
+                ]
             ])
         ;
     }
