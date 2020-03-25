@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\BoardGame;
+use App\Form\BoardGameType;
 use App\Repository\BoardGameRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -50,22 +50,7 @@ class BoardGameController extends AbstractController
     {
         $game = new BoardGame();
 
-        $form = $this->createFormBuilder($game)
-            ->add('name', null, [
-                'label' => 'Nom',
-            ])
-            ->add('description', null, [
-                'label' => 'Description',
-            ])
-            ->add('releasedAt', DateType::class, [
-                'html5' => true,
-                'widget' => 'single_text',
-                'label' => 'Date de sortie'
-            ])
-            ->add('ageGroup', null, [
-                'label' => 'À partir de',
-            ])
-            ->getForm();
+        $form = $this->createForm(BoardGameType::class, $game);
 
         $form->handleRequest($request);
 
@@ -92,24 +77,9 @@ class BoardGameController extends AbstractController
         Request $request,
         EntityManagerInterface $manager
     ) {
-        $form = $this->createFormBuilder($game, [
+        $form = $this->createForm(BoardGameType::class, $game, [
             'method' => 'PUT',
-        ])
-            ->add('name', null, [
-                'label' => 'Nom',
-            ])
-            ->add('description', null, [
-                'label' => 'Description',
-            ])
-            ->add('releasedAt', DateType::class, [
-                'html5' => true,
-                'widget' => 'single_text',
-                'label' => 'Date de sortie'
-            ])
-            ->add('ageGroup', null, [
-                'label' => 'À partir de',
-            ])
-            ->getForm();
+        ]);
 
         $form->handleRequest($request);
 
