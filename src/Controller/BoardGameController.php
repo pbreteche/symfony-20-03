@@ -49,13 +49,20 @@ class BoardGameController extends AbstractController
         $game = new BoardGame();
 
         $form = $this->createFormBuilder($game)
-            ->add('name')
-            ->add('description')
+            ->add('name', null, [
+                'label' => 'Nom',
+            ])
+            ->add('description', null, [
+                'label' => 'Description',
+            ])
             ->add('releasedAt', DateType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
+                'label' => 'Date de sortie'
             ])
-            ->add('ageGroup')
+            ->add('ageGroup', null, [
+                'label' => 'À partir de',
+            ])
             ->getForm();
 
         return $this->render('board_game/new.html.twig', [
