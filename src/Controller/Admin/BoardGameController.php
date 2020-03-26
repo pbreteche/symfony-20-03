@@ -46,16 +46,13 @@ class BoardGameController extends AbstractController
 
     /**
      * @Route("/{id}/edit", methods={"GET", "PUT"})
+     * @IsGranted("GAME_EDIT", subject="game")
      */
     public function edit(
         BoardGame $game,
         Request $request,
         EntityManagerInterface $manager
     ) {
-        if ($game->getAuthoredBy() != $this->getUser()) {
-            throw $this->createAccessDeniedException();
-        }
-
         $form = $this->createForm(BoardGameType::class, $game, [
             'method' => 'PUT',
         ]);
