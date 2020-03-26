@@ -27,5 +27,7 @@
     <div>{% for category in board_game.classifiedIn %}
             {{ category.name }} {{ loop.last ? '': ', ' }}
         {% endfor %}</div>
+    {% if is_granted('ROLE_ADMIN') %}
     <a href="{{ path('app_admin_boardgame_edit', {id: board_game.id}) }}">Éditer</a>
+    {% endif %}
 {% endblock %}
