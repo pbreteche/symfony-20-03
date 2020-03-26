@@ -23,6 +23,7 @@ class BoardGameController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager)
     {
         $game = new BoardGame();
+        $game->setAuthoredBy($this->getUser());
 
         $form = $this->createForm(BoardGameType::class, $game);
 

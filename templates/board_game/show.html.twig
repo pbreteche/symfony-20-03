@@ -24,6 +24,7 @@
         <dt>À partir de</dt>
         <dd>{{ board_game.ageGroup }} ans</dd>
     </dl>
+    <div>{{ board_game.authoredBy.email }}</div>
     <div>{% for category in board_game.classifiedIn %}
             {{ category.name }} {{ loop.last ? '': ', ' }}
         {% endfor %}</div>
