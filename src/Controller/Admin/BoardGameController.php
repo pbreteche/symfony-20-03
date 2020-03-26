@@ -52,6 +52,10 @@ class BoardGameController extends AbstractController
         Request $request,
         EntityManagerInterface $manager
     ) {
+        if ($game->getAuthoredBy() != $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm(BoardGameType::class, $game, [
             'method' => 'PUT',
         ]);
