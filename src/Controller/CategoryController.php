@@ -15,13 +15,10 @@ class CategoryController extends AbstractController
     /**
      * @Route("/{id}")
      */
-    public function show(Category $category, BoardGameRepository $boardGameRepository)
+    public function show(Category $category)
     {
-        $boardGames = $boardGameRepository->findByClassifiedInOne($category);
-
         return $this->render('category/show.html.twig', [
             'category' => $category,
-            'board_games' => $boardGames,
         ]);
     }
 }
