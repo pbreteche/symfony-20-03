@@ -5,6 +5,9 @@
 <ul>
     {% for board_game in board_games %}
     <li>{{ board_game.name }}
+        <div>{% for category in board_game.classifiedIn %}
+                {{ category.name }} {{ loop.last ? '': ', ' }}
+            {% endfor %}</div>
         <a href="{{ path('app_boardgame_show', { id: board_game.id }) }}">
             Voir
         </a></li>

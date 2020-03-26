@@ -23,7 +23,7 @@ class BoardGameController extends AbstractController
     public function index(BoardGameRepository $repository)
     {
         // $boardGames = $repository->findBy(['ageGroup' => 10]);
-        $boardGames = $repository->findAll();
+        $boardGames = $repository->findWithCategories();
 
         return $this->render('board_game/index.html.twig', [
             'board_games' => $boardGames,
