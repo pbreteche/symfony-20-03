@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\BoardGame;
+use App\Entity\Category;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * @method BoardGame|null find($id, $lockMode = null, $lockVersion = null)
@@ -45,5 +47,17 @@ class BoardGameRepository extends ServiceEntityRepository
             'ORDER BY b.releasedAt DESC'
         )->setMaxResults(50)
         ->getResult();
+    }
+
+    public function findByClassifiedInOne(Category $category)
+    {
+        return $this->createQueryBuilder('b')
+            ->join('b.classifiedIn', 'c', Join::WITH, 'c = :category')
+            ->orderBy('b.releasedAt', 'DESC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->setParameter('category', $category)
+            ->getResult()
+            ;
     }
 }
