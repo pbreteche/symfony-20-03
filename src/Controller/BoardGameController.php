@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\BoardGame;
 use App\Repository\BoardGameRepository;
 use App\SearchQuery\BoardGameQuery;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -38,6 +39,7 @@ class BoardGameController extends AbstractController
 
     /**
      * @Route("", methods="GET")
+     * @Cache(public=true, expires="tomorrow")
      */
     public function index(BoardGameRepository $repository)
     {
