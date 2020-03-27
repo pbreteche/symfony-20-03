@@ -24,10 +24,9 @@ class BoardGameController extends AbstractController
      *
      * @Route("/search/{query}", methods="GET")
      */
-    public function search(string $query, BoardGameRepository $repository, BoardGameQuery $searchQuery)
+    public function search(string $query, BoardGameQuery $searchQuery)
     {
-        $criteria = $searchQuery->createCriteria($query);
-        $games = $repository->findBySearchQuery($criteria);
+        $games = $searchQuery->createCriteria($query);
 
         return $this->json($games, Response::HTTP_OK, [], [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [
