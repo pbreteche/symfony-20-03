@@ -19,3 +19,5 @@ board_game:
     age_group:
         display: '%value% ans'
         label: 'À partir de'
+    classified_in:
+        label: 'Catégories'
