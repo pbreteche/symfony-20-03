@@ -3,12 +3,15 @@ board_game:
         title: 'Liste des jeux de société'
     edit_page:
         title: 'Édition de %name%'
+    new_page:
+        title: 'Nouveau jeu de société'
     action:
         back_to_list: 'Retour à la liste'
         edit: 'Modifier'
+        new: 'Ajouter'
         see: 'Voir'
 
-# Fields
+    # Fields
     name:
         label: 'Nom'
     description:
