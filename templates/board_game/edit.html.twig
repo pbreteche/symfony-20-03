@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Édition de {{ game.name }}</h1>
-    {{ include('board_game/_form.html.twig', {form: edit_form, action: 'Mettre à jour'}) }}
+<h1>{{ 'board_game.edit_page.title'|trans({
+        '%name%': game.name
+    }) }}</h1>
+    {{ include('board_game/_form.html.twig', {form: edit_form, action: 'board_game.action.edit'|trans}) }}
 {% endblock %}

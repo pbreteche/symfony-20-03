@@ -22,6 +22,9 @@
          - appeler la méthode hasReleasedAt()
         #}
         <dt>{{ 'board_game.age_group.label'|trans }}</dt>
+        <dd>{{ 'board_game.age_group.display'|trans({
+                '%value%': board_game.ageGroup
+            }) }}</dd>
         <dd>{{ board_game.ageGroup }} ans</dd>
     </dl>
     <div>{{ board_game.authoredBy.email }}</div>

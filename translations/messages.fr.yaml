@@ -1,6 +1,8 @@
 board_game:
     index_page:
         title: 'Liste des jeux de société'
+    edit_page:
+        title: 'Édition de %name%'
     action:
         back_to_list: 'Retour à la liste'
         edit: 'Modifier'
@@ -10,4 +12,5 @@ board_game:
     released_at:
         label: 'Date de sortie'
     age_group:
+        display: '%value% ans'
         label: 'À partir de'
