@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\BoardGame;
 use App\Repository\BoardGameRepository;
+use App\SearchQuery\BoardGameQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,11 +20,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class BoardGameController extends AbstractController
 {
     /**
+     * example: /search/name=example-name+age-group=12
+     *
      * @Route("/search/{query}", methods="GET")
      */
-    public function search(string $query, BoardGameRepository $repository)
+    public function search(string $query, BoardGameRepository $repository, BoardGameQuery $searchQuery)
     {
-        $games = $repository->findBySearchQuery($query);
+        $criteria = $searchQuery->createCriteria($query);
+        $games = $repository->findBySearchQuery($criteria);
 
         return $this->json($games, Response::HTTP_OK, [], [
             AbstractNormalizer::IGNORED_ATTRIBUTES => [

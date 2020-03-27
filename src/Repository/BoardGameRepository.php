@@ -61,7 +61,7 @@ class BoardGameRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findBySearchQuery(string $query)
+    public function findBySearchQuery(array $criteria)
     {
         return $this->findAll();
     }
