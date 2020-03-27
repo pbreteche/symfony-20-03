@@ -7,7 +7,12 @@ board_game:
         back_to_list: 'Retour à la liste'
         edit: 'Modifier'
         see: 'Voir'
+
+# Fields
+    name:
+        label: 'Nom'
     description:
+        label: 'Description'
         no_value: 'Description en cours de rédaction'
     released_at:
         label: 'Date de sortie'
