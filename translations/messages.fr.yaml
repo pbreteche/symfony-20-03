@@ -1,0 +1,13 @@
+board_game:
+    index_page:
+        title: 'Liste des jeux de société'
+    action:
+        back_to_list: 'Retour à la liste'
+        edit: 'Modifier'
+        see: 'Voir'
+    description:
+        no_value: 'Description en cours de rédaction'
+    released_at:
+        label: 'Date de sortie'
+    age_group:
+        label: 'À partir de'

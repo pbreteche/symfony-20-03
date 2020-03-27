@@ -2,16 +2,16 @@
 
 {% block body %}
     <a href="{{ path('app_boardgame_index') }}">
-        Retour à la liste
+        {{ 'board_game.action.back_to_list'|trans }}
     </a>
     <h1>{{ board_game.name }}</h1>
     {% if board_game.description %}
     <div>{{ board_game.description }}</div>
     {% else %}
-    <div>Description en cours de rédaction</div>
+    <div>{{ 'board_game.description.no_value'|trans }}</div>
     {% endif %}
     <dl>
-        <dt>Date de sortie</dt>
+        <dt>{{ 'board_game.released_at.label'|trans }}</dt>
         <dd>{{ board_game.releasedAt | date('d-m-Y') }}</dd>
         {#
         le composant PropertyAccessor essaye dans l'ordre:
@@ -21,7 +21,7 @@
          - appeler la méthode isReleasedAt()
          - appeler la méthode hasReleasedAt()
         #}
-        <dt>À partir de</dt>
+        <dt>{{ 'board_game.age_group.label'|trans }}</dt>
         <dd>{{ board_game.ageGroup }} ans</dd>
     </dl>
     <div>{{ board_game.authoredBy.email }}</div>
@@ -29,6 +29,6 @@
             {{ category.name }} {{ loop.last ? '': ', ' }}
         {% endfor %}</div>
     {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('app_admin_boardgame_edit', {id: board_game.id}) }}">Éditer</a>
+    <a href="{{ path('app_admin_boardgame_edit', {id: board_game.id}) }}">{{ 'board_game.action.edit'|trans }}</a>
     {% endif %}
 {% endblock %}
