@@ -7,6 +7,7 @@ use App\Repository\BoardGameRepository;
 use App\SearchQuery\BoardGameQuery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -58,12 +59,20 @@ class BoardGameController extends AbstractController
      * - Entité
      * - \DateTime
      */
-    public function show(BoardGame $boardGame, ValidatorInterface $validator)
+    public function show(BoardGame $boardGame, Request $request, ValidatorInterface $validator)
     {
+        $etag = md5($boardGame->getName().$boardGame->getDescription());
+        $response = new Response();
+        $response->setPublic();
+        $response->setEtag($etag);
+        if ($response->isNotModified($request)) {
+            return $response;
+        }
+
         // pas utile ici, juste pour un exemple de validation hors formulaire
         $errors = $validator->validate($boardGame);
-        return $this->render('board_game/show.html.twig', [
+        return $response->setContent($this->renderView('board_game/show.html.twig', [
             'board_game' => $boardGame,
-        ]);
+        ]));
     }
 }
