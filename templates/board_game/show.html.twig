@@ -24,8 +24,11 @@
         <dt>À partir de</dt>
         <dd>{{ board_game.ageGroup }} ans</dd>
     </dl>
+    <div>{{ board_game.authoredBy.email }}</div>
     <div>{% for category in board_game.classifiedIn %}
             {{ category.name }} {{ loop.last ? '': ', ' }}
         {% endfor %}</div>
-    <a href="{{ path('app_boardgame_edit', {id: board_game.id}) }}">Éditer</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_admin_boardgame_edit', {id: board_game.id}) }}">Éditer</a>
+    {% endif %}
 {% endblock %}

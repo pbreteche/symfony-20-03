@@ -47,6 +47,12 @@ class BoardGame
      */
     private $classifiedIn;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $authoredBy;
+
     public function __construct()
     {
         $this->classifiedIn = new ArrayCollection();
@@ -127,6 +133,18 @@ class BoardGame
         if ($this->classifiedIn->contains($classifiedIn)) {
             $this->classifiedIn->removeElement($classifiedIn);
         }
+
+        return $this;
+    }
+
+    public function getAuthoredBy(): ?User
+    {
+        return $this->authoredBy;
+    }
+
+    public function setAuthoredBy(?User $authoredBy): self
+    {
+        $this->authoredBy = $authoredBy;
 
         return $this;
     }
